@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,25 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/clients', function () {
-    return "Liste d'utilisateurs :";
-});
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/index', [UserController::class,'index']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/create', function () {
+    return view('/users/create');
+});
 
-Auth::routes();
+Route::get('/user/{id}', function($id){
+	return view('/users/show');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/edit', function () {
+    return view('/users/edit');
+});
 
-Route::resource('utilisateurs', 'App\Http\Controllers\UtilisateursController');
-
+Route::get('/usercount', [UserController::class, 'count']);

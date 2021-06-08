@@ -1,16 +1,12 @@
 @extends('base')
 
-@section('main')
-<div>
-  <a style="margin: 19px;" href="{{ route('contacts.create')}}" class="btn btn-primary">Nouvel utilisateur</a>
-</div>  
+@section('main') 
 <div class="row">
 <div class="col-sm-12">
-    <h1 class="display-3">Utilisateurs</h1>    
+    <h1 class="display-3">User</h1>    
   <table class="table table-striped">
     <thead>
         <tr>
-          <td>ID</td>
           <td>Name</td>
           <td>Email</td>
           <td>Job Title</td>
@@ -21,24 +17,22 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{$utilisateurs->id}}</td>
-            <td>{{$utilisateurs->first_name}} {{$utilisateurs->last_name}}</td>
-            <td>{{$utilisateurs->email}}</td>
-            <td>{{$utilisateurs->job_title}}</td>
-            <td>{{$utilisateurs->city}}</td>
-            <td>{{$utilisateurs->country}}</td>
+            <td>{{$user->first_name}} {{$user->last_name}}</td>
+            <td>{{$user->email}}</td>
+            <td>{{$user->job_title}}</td>
+            <td>{{$user->city}}</td>
+            <td>{{$user->country}}</td>
             <td>
-                <a href="{{ route('utilisateurs.edit',$utilisateurs->id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a>
             </td>
             <td>
-                <form action="{{ route('utilisateurs.destroy', $utilisateurs->id)}}" method="post">
+                <form action="{{ route('users.destroy', $user->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
             </td>
         </tr>
-        @endforeach
     </tbody>
   </table>
 <div>

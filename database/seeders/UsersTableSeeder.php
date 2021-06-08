@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //Nettoyage de la table d'utilisateurs
+        //Nettoyage de la table d'users
         User::truncate();
         $faker = \Faker\Factory::create();
 
@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
 			'password' => $password,
         	]);
 
-        //Génération automatique d'utilisateurs
+        //Génération automatique d'users
         for ($i = 0; $i < 10; $i++) {
             User::create([
                 'name' => $faker->name,

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Utilisateurs;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UtilisateursController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class UtilisateursController extends Controller
      */
     public function index()
     {
-        $utilisateurs = Utilisateurs::all()
-        return view('utilisateurs.index', compact('utilisateurs'));
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -25,7 +25,7 @@ class UtilisateursController extends Controller
      */
     public function create()
     {
-        return view('utilisateurs.create');
+        return view('users.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class UtilisateursController extends Controller
             'email'=>'required'
         ]);
 
-        $contact = new Contact([
+        $contact = new User([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -51,41 +51,41 @@ class UtilisateursController extends Controller
             'country' => $request->get('country')
         ]);
         $contact->save();
-        return redirect('/contacts')->with('success', 'Contact saved!');
+        return redirect('/index')->with('success', 'Contact saved!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Utilisateurs  $utilisateurs
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Utilisateurs $utilisateurs)
+    public function show($id)
     {
-        $utilisateurs = Utilisateurs::find($id);
-        return view('utilisateurs.show', compact('utilisateurs')); 
+        $user = User::find($id);
+        return view('users.show', compact('user')); 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Utilisateurs  $utilisateurs
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Utilisateurs $utilisateurs)
+    public function edit($id)
     {
-        $utilisateurs = Utilisateurs::find($id);
-        return view('utilisateurs.edit', compact('utilisateurs')); 
+        $user = User::find($id);
+        return view('users.edit', compact('user')); 
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Utilisateurs  $utilisateurs
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Utilisateurs $utilisateurs)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'first_name'=>'required',
@@ -93,7 +93,7 @@ class UtilisateursController extends Controller
             'email'=>'required'
         ]);
 
-        $utilisateur = Utilisateurs::find($id);
+        $utilisateur = User::find($id);
         $utilisateur->first_name =  $request->get('first_name');
         $utilisateur->last_name = $request->get('last_name');
         $utilisateur->email = $request->get('email');
@@ -102,27 +102,27 @@ class UtilisateursController extends Controller
         $utilisateur->country = $request->get('country');
         $utilisateur->save();
 
-        return redirect('/utilisateurs')->with('success', 'Utilisateur mis à jour !');    }
+        return redirect('/index')->with('success', 'Utilisateur mis à jour !');    }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Utilisateurs  $utilisateurs
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Utilisateurs $utilisateurs)
+    public function destroy($id)
     {
-        $utilisateur = Utilisateurs::find($id);
-        $utilisateur->delete();
+        $user = User::find($id);
+        $user->delete();
 
-        return redirect('/utilisateurs')->with('success', 'Utilisateur supprimé!');
+        return redirect('/index')->with('success', 'Utilisateur supprimé!');
 
     }
 
-    public function count(Utilisateurs $utilisateurs)
+    public function count(User $users)
     {
-        $utilisateursCount = Utilisateurs->count()
-        return view('utilisateurs.count', compact('utilisateursCount')); 
+        $usersCount = $users->count();
+        return view('users.count', compact('usersCount')); 
     }
 
 }

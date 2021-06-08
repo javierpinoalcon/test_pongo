@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\utilisateurs;
+use App\Models\users;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,6 @@ use App\Models\utilisateurs;
 |
 */
 
-Route::resource('utilisateurs', 'App\Http\Controllers\UtilisateursController');
+Route::resource('users', 'App\Http\Controllers\UserController');
 
 
